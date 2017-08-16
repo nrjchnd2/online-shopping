@@ -10,8 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.neeraj.onlineShopping.controller.MyController;
+import com.neeraj.shoppingbackend.dao.CategoryDAO;
+import com.neeraj.shoppingbackend.daoimpl.CategoryDAOImpl;
+
 @Configuration
-@ComponentScan(basePackages={"com.neeraj.onlineShopping.controller"})
+@ComponentScan(basePackageClasses={MyController.class,CategoryDAOImpl.class})
 @EnableWebMvc
 public class Conf extends WebMvcConfigurerAdapter{
 

@@ -52,6 +52,13 @@ window.menu='${title}';
 		<%@ include file="contact.jsp"%>
 		<!-- /.container -->
 	</c:if>
+	
+	<c:if test="${userAllProductsClick==true or userCategoryProductsClick==true}">
+		<!-- Page Content -->
+		<%@ include file="listProducts.jsp"%>
+		<!-- /.container -->
+	</c:if>
+	
 	</div>
 	<!-- Footer -->
 	<%@ include file="./shared/footer.jsp"%>
