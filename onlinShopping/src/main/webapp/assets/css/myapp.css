@@ -14,3 +14,20 @@ body {
         padding-top: 6px;
     }
 }
+
+.productImages{
+	width:100px;
+	height:100px;
+}
+.content{
+	padding-bottom:60px;
+	
+}
+
+.footer{
+	position:absolute;
+	bottom:15px;
+	height:60px;
+	
+}
+

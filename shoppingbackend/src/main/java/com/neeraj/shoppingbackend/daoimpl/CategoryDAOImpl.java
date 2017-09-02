@@ -1,58 +1,81 @@
 package com.neeraj.shoppingbackend.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
+import org.hibernate.SessionFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neeraj.shoppingbackend.dao.CategoryDAO;
 import com.neeraj.shoppingbackend.dto.Category;
 
 @Repository("categoryDAO")
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO {
 
-	private static List<Category> categories = new ArrayList<>();
-
-	static {
-
-		// first category item
-		Category c1 = new Category();
-		c1.setId(1);
-		c1.setName("Television");
-		c1.setDescription("Category for televisions");
-		c1.setImageUrl("c1.png");
-		categories.add(c1);
-
-		// second category item
-		c1 = new Category();
-		c1.setId(2);
-		c1.setName("Mobile");
-		c1.setDescription("Category for mobiles");
-		c1.setImageUrl("c2.png");
-		categories.add(c1);
-
-		// third category item
-		c1 = new Category();
-		c1.setId(3);
-		c1.setName("Laptop");
-		c1.setDescription("Category for laptops");
-		c1.setImageUrl("c3.png");
-		categories.add(c1);
-	}
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Category> list() {
+	public boolean addCategory(Category category) {
+		System.out.println(category.toString());
+		try {
 
-		return categories;
+			sessionFactory.getCurrentSession().persist(category);
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> list() {
+		String hql="from Category where active=:active";
+		@SuppressWarnings("rawtypes")
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("active",true);
+		return query.getResultList();
 	}
 
 	@Override
 	public Category get(int id) {
-		for (Category category : categories) {
-			if (category.getId() == id)
-				return category;
+
+		return sessionFactory.getCurrentSession().get(Category.class, id);
+	}
+
+	@Override
+	public boolean update(Category category) {
+		try {
+
+			sessionFactory.getCurrentSession().update(category);
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		return null;
+	}
+
+	@Override
+	public boolean delete(Category category) {
+		
+		try {
+
+			sessionFactory.getCurrentSession().update(category);
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
