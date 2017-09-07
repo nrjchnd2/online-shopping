@@ -3,6 +3,8 @@ package com.neeraj.onlineShopping.initializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.neeraj.onlineShopping.configuration.Conf;
@@ -31,4 +33,10 @@ public class MyInitializer extends AbstractAnnotationConfigDispatcherServletInit
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
 	}
+	@Override
+    protected DispatcherServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+        DispatcherServlet ds = new DispatcherServlet(servletAppContext);
+        ds.setThrowExceptionIfNoHandlerFound(true);
+        return ds;
+    }
 }

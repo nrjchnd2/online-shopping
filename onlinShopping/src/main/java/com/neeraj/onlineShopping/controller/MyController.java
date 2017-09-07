@@ -8,15 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neeraj.onlineShopping.exception.ProductNotFoundException;
 import com.neeraj.shoppingbackend.dao.CategoryDAO;
+import com.neeraj.shoppingbackend.dao.ProductDAO;
 import com.neeraj.shoppingbackend.daoimpl.CategoryDAOImpl;
 import com.neeraj.shoppingbackend.dto.Category;
+import com.neeraj.shoppingbackend.dto.Product;
 
 @RestController
 public class MyController {
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
+	@Autowired
+	private ProductDAO productDAO;
 
 	@RequestMapping(value={"/","/home"},method=RequestMethod.GET)
 	public ModelAndView home(Model m) {
@@ -75,5 +80,20 @@ public class MyController {
 		return mv;
 
 	}
+	
+	@RequestMapping(value="/show/{id}/product",method=RequestMethod.GET)
+	public ModelAndView showOneProduct(@PathVariable int id) throws ProductNotFoundException{
+		ModelAndView mv=new ModelAndView("home");
+		Product product=productDAO.getProduct(id);
+		if(product==null)
+			throw new ProductNotFoundException();
+		product.setViews(product.getViews()+1);
+		productDAO.update(product);
+		mv.addObject("title",product.getName());
+		mv.addObject("product",product);
+		mv.addObject("userClickOneProduct",true);
+	    return mv;
+	}
+	
 	
 	}

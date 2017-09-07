@@ -15,7 +15,7 @@ import com.neeraj.shoppingbackend.dao.CategoryDAO;
 import com.neeraj.shoppingbackend.daoimpl.CategoryDAOImpl;
 
 @Configuration
-@ComponentScan(basePackageClasses={MyController.class})
+@ComponentScan(basePackages={"com.neeraj.onlineShopping"})
 @ComponentScan(basePackages={"com.neeraj.shoppingbackend"})
 @EnableWebMvc
 public class Conf extends WebMvcConfigurerAdapter{

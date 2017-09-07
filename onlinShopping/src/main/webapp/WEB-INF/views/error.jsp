@@ -4,8 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/static/css"></spring:url>
-<spring:url var="js" value="/static/js"></spring:url>
-<spring:url var="images" value="/static/images"></spring:url>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
 <html lang="en">
 
@@ -21,7 +19,7 @@
 <script>
 window.menu='${title}';
 window.contextRoot='${contextRoot}';
-winndow.images='${images}';
+
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -36,52 +34,34 @@ winndow.images='${images}';
 
 <body>
 <div class="wrapper">
-<div class="content">
-	<!-- Navigation -->
-	<%@ include file="./shared/navbar.jsp"%>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container">
+<div class="navbar=header">
+<a class="navbar-brand" href="${contextRoot}/home">Online Shopping</a>
+</div>
+</div>
 
-	<c:if test="${userHomeClick==true}">
-		<!-- Page Content -->
-		<%@ include file="main.jsp"%>
-		<!-- /.container -->
-	</c:if>
-	
-	<c:if test="${userAboutClick==true}">
-		<!-- Page Content -->
-		<%@ include file="about.jsp"%>
-		<!-- /.container -->
-	</c:if>
-	<c:if test="${userContactClick==true}">
-		<!-- Page Content -->
-		<%@ include file="contact.jsp"%>
-		<!-- /.container -->
-	</c:if>
-	
-	<c:if test="${userAllProductsClick==true or userCategoryProductsClick==true}">
-		<!-- Page Content -->
-		<%@ include file="listProducts.jsp"%>
-		<!-- /.container -->
-	</c:if>
-	
-	<c:if test="${userClickOneProduct==true}">
-		<!-- Page Content -->
-		<%@ include file="singleProduct.jsp"%>
-		<!-- /.container -->
-	</c:if>
+
+<div class="content">
+	<div class="container">
+	<div class="row">
+	<div class="col-xs-12">
+	<div class="jumbotron">
+	<h1>${errorTitle}</h1>
+	<hr>
+	<blockquote>
+	${errorDescription}
+	</blockquote>
+	</div>
+	</div>
+	</div>
+	</div>
 	
 	</div>
 	<!-- Footer -->
 	<%@ include file="./shared/footer.jsp"%>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="${js}/jquery.js"></script>
-	<script src="${js}/popper.js"></script>
-	<script src="${js}/bootstrap.js"></script>
-	<script src="${js}/jquery.dataTables.js"></script>
-	
-	<script src="${js}/myapp.js"></script>
-
 </div>
 </body>
 
-</html>
+</html>1
