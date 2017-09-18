@@ -5,23 +5,30 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity(name="Product")
 public class Product {
 
 	@Id
 	private int id;
 	private String code;
+	@NotNull(message="Please enter a product name")
 	private String name;
+	@NotNull(message="Please enter a product brand")
 	private String brand;
 	@JsonIgnore
+	@NotNull(message="Please enter a product description")
 	private String description;
+	@Min(value=1,message="Unit price for the product can't be less than 1")
 	@Column(name="unit_price")
 	private double unitPrice;
 	private int quantity;
-	@JsonIgnore
 	@Column(name="is_active")
 	private boolean active;
 	@JsonIgnore
@@ -32,6 +39,11 @@ public class Product {
 	private int supplierId;
 	private int purchases;
 	private int views;
+	
+	@Transient
+	private MultipartFile file;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -114,6 +126,14 @@ public class Product {
 				+ ", categoryId=" + categoryId + ", supplierId=" + supplierId + ", purchases=" + purchases + ", views="
 				+ views + "]";
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
+	
 	
 	
 	

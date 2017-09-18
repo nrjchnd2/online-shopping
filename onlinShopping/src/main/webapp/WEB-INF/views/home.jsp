@@ -21,7 +21,7 @@
 <script>
 window.menu='${title}';
 window.contextRoot='${contextRoot}';
-winndow.images='${images}';
+window.images='${images}';
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -69,16 +69,23 @@ winndow.images='${images}';
 		<!-- /.container -->
 	</c:if>
 	
+	<c:if test="${userClicksManageProducts==true}">
+		<!-- Page Content -->
+		<%@ include file="manageProducts.jsp"%>
+		<!-- /.container -->
+	</c:if>
+	
 	</div>
 	<!-- Footer -->
 	<%@ include file="./shared/footer.jsp"%>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${js}/jquery.js"></script>
+	<script src="${js}/jquery.validate.js"></script>
 	<script src="${js}/popper.js"></script>
 	<script src="${js}/bootstrap.js"></script>
 	<script src="${js}/jquery.dataTables.js"></script>
-	
+	<script src="${js}/bootbox.min.js"></script>
 	<script src="${js}/myapp.js"></script>
 
 </div>

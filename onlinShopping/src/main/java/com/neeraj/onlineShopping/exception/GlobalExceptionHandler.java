@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
 		
 		ModelAndView mv=new ModelAndView("error");
 		mv.addObject("errorTitle","Something went wrong");
+		ex.printStackTrace();
 		mv.addObject("errorDescription","Please contact admin..");
 		mv.addObject("title","error page");
 		return mv;
